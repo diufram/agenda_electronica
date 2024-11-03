@@ -10,6 +10,12 @@
     'depends': ['base', 'hr'],  # Asegúrate de que 'hr' esté instalado si lo necesitas
     'data': [
         'security/ir.model.access.csv',
+        'data/curso_seeder.xml',
+        'data/horario_seeder.xml',
+        'data/materia_seeder.xml',
+        'data/materia_horario_seeder.xml',
+        'data/profe_materia_seeder.xml',
+        'data/alumno_materia_seeder.xml',
     ],
     'license': 'LGPL-3',
     # 'images': ['static/description/banner.gif'],  # Descomenta si tienes la imagen

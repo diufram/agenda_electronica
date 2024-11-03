@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="1" model="agenda.curso">
+        <field name="nombre">1ro</field>
+        <field name="nivel">Primaria</field>
+        <field name="paralelo">A</field>
+    </record>
+    <record id="2" model="agenda.curso">
+        <field name="nombre">1ro</field>
+        <field name="nivel">Primaria</field>
+        <field name="paralelo">B</field>
+    </record>
+
+    <record id="3" model="agenda.curso">
+        <field name="nombre">2do</field>
+        <field name="nivel">Primaria</field>
+        <field name="paralelo">A</field>
+    </record>
+    <record id="4" model="agenda.curso">
+        <field name="nombre">2do</field>
+        <field name="nivel">Primaria</field>
+        <field name="paralelo">B</field>
+    </record>
+
+    <record id="5" model="agenda.curso">
+        <field name="nombre">3ro</field>
+        <field name="nivel">Primaria</field>
+        <field name="paralelo">A</field>
+    </record>
+    <record id="6" model="agenda.curso">
+        <field name="nombre">3ro</field>
+        <field name="nivel">Primaria</field>
+        <field name="paralelo">B</field>
+    </record>
+
+    <record id="7" model="agenda.curso">
+        <field name="nombre">4to</field>
+        <field name="nivel">Primaria</field>
+        <field name="paralelo">A</field>
+    </record>
+    <record id="8" model="agenda.curso">
+        <field name="nombre">4to</field>
+        <field name="nivel">Primaria</field>
+        <field name="paralelo">B</field>
+    </record>
+
+    <record id="9" model="agenda.curso">
+        <field name="nombre">5to</field>
+        <field name="nivel">Primaria</field>
+        <field name="paralelo">A</field>
+    </record>
+    <record id="10" model="agenda.curso">
+        <field name="nombre">5to</field>
+        <field name="nivel">Primaria</field>
+        <field name="paralelo">B</field>
+    </record>
+
+    <record id="11" model="agenda.curso">
+        <field name="nombre">6to</field>
+        <field name="nivel">Primaria</field>
+        <field name="paralelo">A</field>
+    </record>
+    <record id="12" model="agenda.curso">
+        <field name="nombre">6to</field>
+        <field name="nivel">Primaria</field>
+        <field name="paralelo">B</field>
+    </record>
+
+    <!-- Agrega más registros según sea necesario -->
+</odoo>

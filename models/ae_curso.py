@@ -8,7 +8,5 @@ class Curso(models.Model):
     nombre = fields.Char(string="Nombre")
     paralelo = fields.Char(string="Paralelo")
 
-    creador_id = fields.Many2one('res.partner', string="Persona") 
-
     materia_horarios_ids = fields.One2many('agenda.materia.horario', 'curso_id', string="Cursos")
 

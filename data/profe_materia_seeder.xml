@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="profe_materia_1" model="agenda.profe.materia">
+        <field name="materia_horario_id">1</field>
+        <field name="profesor_id">1</field>
+    </record>
+    <record id="profe_materia_2" model="agenda.profe.materia">
+        <field name="materia_horario_id">2</field>
+        <field name="profesor_id">1</field>
+    </record>
+
+
+</odoo>

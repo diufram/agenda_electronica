@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="materia_horario_1" model="agenda.materia.horario">
+        <field name="materia_id">1</field>
+        <field name="horario_id">1</field>
+        <field name="curso_id">1</field>
+    </record>
+
+    <record id="materia_horario_2" model="agenda.materia.horario">
+        <field name="materia_id">2</field>
+        <field name="horario_id">2</field>
+        <field name="curso_id">2</field>
+    </record>
+
+    <record id="materia_horario_3" model="agenda.materia.horario">
+        <field name="materia_id">3</field>
+        <field name="horario_id">3</field>
+        <field name="curso_id">3</field>
+    </record>
+
+
+</odoo>
