@@ -14,8 +14,9 @@
         'data/horario_seeder.xml',
         'data/materia_seeder.xml',
         'data/materia_horario_seeder.xml',
-        'data/profe_materia_seeder.xml',
         'data/alumno_materia_seeder.xml',
+        'data/tarea_seeder.xml',
+        'data/tarea_alumno_seeder.xml',
     ],
     'license': 'LGPL-3',
     # 'images': ['static/description/banner.gif'],  # Descomenta si tienes la imagen

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="tarea_alumno_1" model="agenda.tarea.alumno">
+        <field name="tarea_id">1</field>
+        <field name="alumno_id">3</field>
+    </record>
+
+</odoo>

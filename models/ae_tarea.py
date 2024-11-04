@@ -8,7 +8,7 @@ class Tarea(models.Model):
     #archivos = fil
     titulo = fields.Char(string="Titulo", help="Titulo de la Tarea")
     fecha_presentacion = fields.Date(string="Fecha de Presentacion")
-    profe_materia_id = fields.Many2one('agenda.profe.materia', string="Profe Materia", required=True)
+    materia_horario_id = fields.Many2one('agenda.materia.horario', string="Materia Horario", required=True)
     alumno_ids = fields.One2many('agenda.tarea.alumno', 'tarea_id', string="Alumno")
 
     

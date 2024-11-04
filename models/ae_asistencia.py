@@ -6,4 +6,4 @@ class Asistencia(models.Model):
 
     fecha = fields.Date(string="Fecha")
 
-    materia_id = fields.Many2one('agenda.profe.materia', string="Materia", required=True)
+    materia_horario_id = fields.Many2one('agenda.materia.horario', string="Materia Horario", required=True)

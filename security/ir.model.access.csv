@@ -17,9 +17,6 @@ access_horario_manager,access_horario_manager,agenda_electronica.model_agenda_ho
 access_materia_horario_user,access_materia_horario_user,agenda_electronica.model_agenda_materia_horario,base.group_user,1,0,0,0
 access_materia_horario_manager,access_materia_horario_manager,agenda_electronica.model_agenda_materia_horario,base.group_system,1,1,1,1
 
-access_profe_materia_user,access_profe_materia_user,agenda_electronica.model_agenda_profe_materia,base.group_user,1,0,0,0
-access_profe_materia_manager,access_profe_materia_manager,agenda_electronica.model_agenda_profe_materia,base.group_system,1,1,1,1
-
 access_tarea_user,access_tarea_user,agenda_electronica.model_agenda_tarea,base.group_user,1,0,0,0
 access_tarea_manager,access_tarea_manager,agenda_electronica.model_agenda_tarea,base.group_system,1,1,1,1
 

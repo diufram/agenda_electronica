@@ -31,7 +31,7 @@ class Persona(models.Model):
 
     notificaciones_ids = fields.One2many('agenda.notificacion', 'creador_id', string="Notificaciones")
 
-    profesor_materia_ids = fields.One2many('agenda.profe.materia', 'profesor_id', string="Profesor Materias")
+    materia_horario_ids = fields.One2many('agenda.materia.horario', 'profesor_id', string="Profesor Materias")
 
     materia_horarios_ids = fields.One2many('agenda.alumno.materia', 'alumno_id', string="Materia Horarios")
 

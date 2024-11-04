@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="tarea_1" model="agenda.tarea">
+        <field name="titulo">Tarea de matematicas</field>
+        <field name="descripcion">Se debe presentar antes de la fecha indicada</field>
+        <field name="fecha_presentacion">2024-11-04</field>
+        <field name="materia_horario_id">1</field>
+                
+    </record>
+
+</odoo>
