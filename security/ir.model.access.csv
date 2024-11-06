@@ -28,3 +28,6 @@ access_alumno_materia_manager,access_alumno_materia_manager,agenda_electronica.m
 
 access_notificacion_user,access_notificacion_user,agenda_electronica.model_agenda_notificacion,base.group_user,1,0,0,0
 access_notificacion_manager,access_notificacion_manager,agenda_electronica.model_agenda_notificacion,base.group_system,1,1,1,1
+
+access_apoderado_alumno_user,access_apoderado_alumno_user,agenda_electronica.model_agenda_apoderado_alumno,base.group_user,1,0,0,0
+access_apoderado_alumno_manager,access_apoderado_alumno_manager,agenda_electronica.model_agenda_apoderado_alumno,base.group_system,1,1,1,1

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- ESTOS SON LOS APODERADOS -->
+    <record id="persona_1" model="res.partner">
+        <field name="name">Julio Cesar Fariani</field>
+        <field name="es_administrador">False</field>
+        <field name="es_profesor">False</field>
+        <field name="es_apoderado">True</field>
+        <field name="es_alumno">False</field>
+        <field name="ci">4312342</field>
+    </record>
+    <record id="persona_2" model="res.partner">
+        <field name="name">Fernanda Ocampos</field>
+        <field name="es_administrador">False</field>
+        <field name="es_profesor">False</field>
+        <field name="es_apoderado">True</field>
+        <field name="es_alumno">False</field>
+        <field name="ci">4315343</field>
+    </record>
+    <record id="persona_3" model="res.partner">
+        <field name="name">Francisco Castillo</field>
+        <field name="es_administrador">False</field>
+        <field name="es_profesor">False</field>
+        <field name="es_apoderado">True</field>
+        <field name="es_alumno">False</field>
+        <field name="ci">5432343</field>
+    </record>
+
+
+    <!-- ESTOS SON LOS ALUMNOS -->
+    <record id="persona_4" model="res.partner">
+        <field name="name">Matias Franco Fariani</field>
+        <field name="es_administrador">False</field>
+        <field name="es_profesor">False</field>
+        <field name="es_apoderado">False</field>
+        <field name="es_alumno">True</field>
+        <field name="ci">4312342</field>
+    </record>
+    <record id="persona_5" model="res.partner">
+        <field name="name">Fabrizio Romano</field>
+        <field name="es_administrador">False</field>
+        <field name="es_profesor">False</field>
+        <field name="es_apoderado">False</field>
+        <field name="es_alumno">True</field>
+        <field name="ci">4315343</field>
+    </record>
+    <record id="persona_6" model="res.partner">
+        <field name="name">Alejandra Llanos</field>
+        <field name="es_administrador">False</field>
+        <field name="es_profesor">False</field>
+        <field name="es_apoderado">False</field>
+        <field name="es_alumno">True</field>
+        <field name="ci">5432343</field>
+    </record>
+
+</odoo>

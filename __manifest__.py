@@ -17,6 +17,9 @@
         'data/alumno_materia_seeder.xml',
         'data/tarea_seeder.xml',
         'data/tarea_alumno_seeder.xml',
+        'data/persona_seeder.xml',
+        'data/apoderado_alumno_seeder.xml',
+        
     ],
     'license': 'LGPL-3',
     # 'images': ['static/description/banner.gif'],  # Descomenta si tienes la imagen

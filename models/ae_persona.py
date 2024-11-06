@@ -10,23 +10,9 @@ class Persona(models.Model):
     token = fields.Char(string="Token", help="Token del Dispositivo")
     ci = fields.Char(string="Ci", help="Carnet de Identidad")
 
-    alumno_ids = fields.Many2many(
-        'res.partner',  # Modelo relacionado (res.partner)
-        'apododerado_alumno',  # Nombre de la tabla intermedia
-        'apoderado_id',  # Columna que representa al apoderado en la tabla intermedia
-        'alumno_id',  # Columna que representa al alumno en la tabla intermedia
-        string="Alumnos",
-        domain=[('es_alumno', '=', True)]  # Filtro para mostrar solo alumnos
-    )
+    alumno_ids = fields.One2many('agenda.apoderado.alumno', 'alumno_id', string="Alumno")
 
-    apoderado_ids = fields.Many2many(
-        'res.partner',
-        'apododerado_alumno',
-        'alumno_id',  # Columna que representa al alumno en la tabla intermedia
-        'apoderado_id',  # Columna que representa al apoderado en la tabla intermedia
-        string="Apoderados",
-        domain=[('es_apoderado', '=', True)]  # Filtro para mostrar solo apoderados
-    )
+    apoderado_ids = fields.One2many('agenda.apoderado.alumno', 'apoderado_id', string="Apoderado")
 
 
     notificaciones_ids = fields.One2many('agenda.notificacion', 'creador_id', string="Notificaciones")
