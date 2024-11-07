@@ -1,6 +1,7 @@
 from odoo import http
 from odoo.http import request
 import json
+import base64
 
 class ApiProfesorController(http.Controller):
     # Definir una ruta para obtener todos los cursos
@@ -96,4 +97,39 @@ class ApiProfesorController(http.Controller):
             json.dumps(data),
             status=200,
             mimetype='application/json'
+        )
+    
+    @http.route('/api/profesor/crear/tarea/<int:materia_horario_id>', type='http', auth='public', methods=['POST'], csrf=False)
+    def create_tarea(self, materia_horario_id, **kwargs):
+        # Obtener los datos JSON enviados en el campo 'data'
+        data = json.loads(request.httprequest.form.get('data', '{}'))
+        titulo = data.get('titulo')
+        descripcion = data.get('descripcion')
+        fecha_presentacion = data.get('fecha_presentacion')
+        
+        # Obtener archivo adjunto desde la solicitud
+        archivo = request.httprequest.files.get('archivo')
+        
+        # Procesar el archivo si existe
+        archivo_datos = None
+        archivo_nombre = None
+        if archivo:
+            archivo_datos = base64.b64encode(archivo.read()).decode('utf-8')  # Convertir el archivo a base64
+            archivo_nombre = archivo.filename
+
+        # Crear el registro en el modelo 'agenda.tarea'
+        tarea_creada = request.env['agenda.tarea'].sudo().create({
+            'titulo': titulo,
+            'descripcion': descripcion,
+            'fecha_presentacion': fecha_presentacion,
+            'materia_horario_id': materia_horario_id,
+            'archivo_nombre': archivo_nombre,
+            'archivo_datos': archivo_datos,
+        })
+
+        # Devolver una respuesta JSON válida
+        return http.Response(
+            json.dumps({'status': 'success', 'tarea_id': tarea_creada.id}),
+            content_type='application/json',
+            status=200
         )

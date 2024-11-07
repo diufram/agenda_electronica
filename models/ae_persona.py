@@ -1,7 +1,7 @@
 from odoo import models, fields
 
 class Persona(models.Model):
-    _inherit = 'res.partner'
+    _inherit = 'res.users'
 
     es_administrador = fields.Boolean(string="Es Administrador")
     es_profesor = fields.Boolean(string="Es Profesor")
@@ -9,6 +9,7 @@ class Persona(models.Model):
     es_alumno = fields.Boolean(string="Es Alumno")
     token = fields.Char(string="Token", help="Token del Dispositivo")
     ci = fields.Char(string="Ci", help="Carnet de Identidad")
+    name = fields.Char(string="Nombre")
 
     alumno_ids = fields.One2many('agenda.apoderado.alumno', 'alumno_id', string="Alumno")
 

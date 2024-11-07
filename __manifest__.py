@@ -4,7 +4,7 @@
     'description': """
         Es un sistema para que los colegios y sus estudiantes ocupen una agenda electrónica.
     """,
-    'author': "Grupo5",
+    'author': "Grupo 5",
     'category': 'Education',  # O prueba con una categoría más común en Odoo
     'version': '1.0',
     'depends': ['base', 'hr'],  # Asegúrate de que 'hr' esté instalado si lo necesitas
@@ -14,11 +14,11 @@
         'data/horario_seeder.xml',
         'data/materia_seeder.xml',
         'data/materia_horario_seeder.xml',
-        'data/alumno_materia_seeder.xml',
-        'data/tarea_seeder.xml',
-        'data/tarea_alumno_seeder.xml',
+        #'data/alumno_materia_seeder.xml',
+        #'data/tarea_seeder.xml',
+        #'data/tarea_alumno_seeder.xml',
         'data/persona_seeder.xml',
-        'data/apoderado_alumno_seeder.xml',
+        #'data/apoderado_alumno_seeder.xml',
         
     ],
     'license': 'LGPL-3',

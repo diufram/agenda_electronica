@@ -8,7 +8,7 @@ class MateriaHorario(models.Model):
     horario_id = fields.Many2one('agenda.horario', string="Horario", required=True)
     curso_id = fields.Many2one('agenda.curso', string="Curso", required=True) 
 
-    profesor_id = fields.Many2one('res.partner', string="Profesor", required=True) 
+    profesor_id = fields.Many2one('res.users', string="Profesor", required=True) 
 
     tarea_ids = fields.One2many('agenda.tarea', 'materia_horario_id', string="Tareas")
 

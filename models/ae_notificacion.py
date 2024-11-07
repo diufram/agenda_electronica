@@ -8,7 +8,7 @@ class Notificacion(models.Model):
     titulo = fields.Char(string="Titulo")
     mensaje = fields.Text(string="Mensaje")
 
-    creador_id = fields.Many2one('res.partner', string="Persona") 
+    creador_id = fields.Many2one('res.users', string="Persona") 
 
 
 

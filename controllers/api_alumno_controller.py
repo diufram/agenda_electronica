@@ -37,6 +37,7 @@ class ApiAlumnoController(http.Controller):
                 'titulo': tarea.titulo,
                 'descripcion': tarea.descripcion,
                 'fecha_presentacion':tarea.fecha_presentacion.isoformat(),  
+                'archivo_nombre':tarea.archivo_nombre,  
             })
 
         # Devolver los datos en formato JSON
@@ -44,4 +45,31 @@ class ApiAlumnoController(http.Controller):
             json.dumps(data),
             status=200,
             mimetype='application/json'
+        )
+    
+    @http.route('/api/alumno/tarea/<int:tarea_id>', type='http', auth='public', methods=['GET'], csrf=False)
+    def get_tarea(self, tarea_id, **kwargs):
+        # Obtener el registro de la tarea por su ID
+        tarea = request.env['agenda.tarea'].sudo().search([('id', '=', tarea_id)], limit=1)
+        
+
+        # Convertir el archivo adjunto a formato base64 si existe
+        archivo_datos = tarea.archivo_datos.decode('utf-8') if tarea.archivo_datos else None
+
+        # Preparar los datos para la respuesta
+        tarea_data = {
+            'id': tarea.id,
+            'titulo': tarea.titulo,
+            'descripcion': tarea.descripcion,
+            'fecha_presentacion': tarea.fecha_presentacion.strftime('%Y-%m-%d') if tarea.fecha_presentacion else None,
+            'materia_horario_id': tarea.materia_horario_id.id if tarea.materia_horario_id else None,
+            'archivo_nombre': tarea.archivo_nombre,
+            'archivo_datos': archivo_datos,  # Archivo en base64 para ser mostrado en la respuesta
+        }
+
+        # Devolver los datos en formato JSON
+        return http.Response(
+            json.dumps({'status': 'success', 'tarea': tarea_data}),
+            content_type='application/json',
+            status=200
         )
