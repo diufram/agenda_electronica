@@ -1,0 +1,28 @@
+<odoo>
+    <!-- Vista tipo List -->
+    <record id="view_agenda_curso_list" model="ir.ui.view">
+        <field name="name">agenda.curso.list</field>
+        <field name="model">agenda.curso</field>
+        <field name="arch" type="xml">
+            <list string="Cursos">
+                <field name="nombre"/>
+                <field name="paralelo"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vista tipo Form -->
+    <record id="view_agenda_curso_form" model="ir.ui.view">
+        <field name="name">agenda.curso.form</field>
+        <field name="model">agenda.curso</field>
+        <field name="arch" type="xml">
+            <form string="Curso">
+                <sheet>
+                    <group>
+                        <field name="nombre"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

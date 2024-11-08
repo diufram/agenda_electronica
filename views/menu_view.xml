@@ -1,0 +1,21 @@
+<odoo>
+    <!-- Menú Principal --> 
+    <menuitem id="menu_agenda_root" name="Agenda Electronica" sequence="1"/>
+
+    <!-- Acción para Materias -->
+    <record id="action_agenda_materia" model="ir.actions.act_window">
+        <field name="name">Materias</field>
+        <field name="res_model">agenda.materia</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="action_agenda_curso" model="ir.actions.act_window">
+        <field name="name">Cursos</field>
+        <field name="res_model">agenda.curso</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Menú de Materias -->
+    <menuitem id="menu_agenda_materia" name="Materias" parent="menu_agenda_root" action="action_agenda_materia"/>
+    <menuitem id="menu_agenda_curso" name="Cursos" parent="menu_agenda_root" action="action_agenda_curso"/>
+</odoo>

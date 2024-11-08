@@ -1,0 +1,27 @@
+<odoo>
+    <!-- Vista tipo List -->
+    <record id="view_agenda_materia_list" model="ir.ui.view">
+        <field name="name">agenda.materia.list</field>
+        <field name="model">agenda.materia</field>
+        <field name="arch" type="xml">
+            <list string="Materias">
+                <field name="nombre"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vista tipo Form -->
+    <record id="view_agenda_materia_form" model="ir.ui.view">
+        <field name="name">agenda.materia.form</field>
+        <field name="model">agenda.materia</field>
+        <field name="arch" type="xml">
+            <form string="Materia">
+                <sheet>
+                    <group>
+                        <field name="nombre"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
