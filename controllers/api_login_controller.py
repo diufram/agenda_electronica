@@ -14,6 +14,7 @@ class ApiLoginController(http.Controller):
 
             user = request.env['res.users'].sudo().search([('ci', '=', ci)])
 
+
             if user:
                 tipo = 1
                 if user.es_profesor:
@@ -22,7 +23,7 @@ class ApiLoginController(http.Controller):
                     tipo = 2
                 elif user.es_alumno:
                      tipo = 3
-
+                user.write({'token': token})
                 return http.Response(
                 json.dumps({
                 'id': user.id, 

@@ -1,6 +1,7 @@
 from odoo import http
 from odoo.http import request
 import json
+import base64
 
 class ApiAlumnoController(http.Controller):
     # Definir una ruta para obtener todos los cursos
@@ -70,6 +71,29 @@ class ApiAlumnoController(http.Controller):
         # Devolver los datos en formato JSON
         return http.Response(
             json.dumps({'status': 'success', 'tarea': tarea_data}),
+            content_type='application/json',
+            status=200
+        )
+
+    @http.route('/api/alumno/<int:alumno_id>/presentar/tarea/<int:tarea_id>', type='http', auth='public', methods=['POST'], csrf=False)
+    def presentar_tarea(self, alumno_id , tarea_id, **kwargs):
+        
+        tarea_alumno = request.env['agenda.tarea.alumno'].sudo().search([('tarea_id', '=' , tarea_id),('alumno_id', '=' , alumno_id)])
+        
+        archivo = request.httprequest.files.get('archivo')
+        
+        # Procesar el archivo si existe
+        archivo_datos = None
+        archivo_nombre = None
+        if archivo:
+            archivo_datos = base64.b64encode(archivo.read()).decode('utf-8')  # Convertir el archivo a base64
+            archivo_nombre = archivo.filename
+
+        tarea_alumno.write({'estado': True, 'archivo_nombre':archivo_nombre , 'archivo_datos': archivo_datos,})
+
+        # Devolver una respuesta JSON válida
+        return http.Response(
+            json.dumps({'status': 'success'}),
             content_type='application/json',
             status=200
         )
