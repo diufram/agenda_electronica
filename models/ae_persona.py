@@ -23,4 +23,6 @@ class Persona(models.Model):
     materia_horarios_ids = fields.One2many('agenda.alumno.materia', 'alumno_id', string="Materia Horarios")
 
     tareas_ids = fields.One2many('agenda.tarea.alumno', 'alumno_id', string="Tareas")
+
+    asistencia_alumno_ids = fields.One2many('agenda.asistencia.alumno', 'alumno_id', string="Asistencias")
     

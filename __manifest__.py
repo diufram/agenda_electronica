@@ -26,7 +26,7 @@
         
     ],
     'license': 'LGPL-3',
-    # 'images': ['static/description/banner.gif'],  # Descomenta si tienes la imagen
+    'images': ['static/description/banner.gif'],  # Descomenta si tienes la imagen
     'installable': True,
     'application': True,
     'auto_install': False,

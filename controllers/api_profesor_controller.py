@@ -199,4 +199,7 @@ class ApiProfesorController(http.Controller):
             ) """
 
 
-
+    @http.route('/api/apoderado/asistencia/<int:idTareaAlumno>', type='http', auth='public', methods=['GET'], csrf=False)
+    def tomar_asistencia(self, idTareaAlumno, **kwargs):
+        tarea_alumno = request.env['agenda.tarea.alumno'].sudo().browse(idTareaAlumno)
+        tarea_alumno.write({'visto': True})

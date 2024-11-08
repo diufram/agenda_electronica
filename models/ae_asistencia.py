@@ -7,3 +7,5 @@ class Asistencia(models.Model):
     fecha = fields.Date(string="Fecha")
 
     materia_horario_id = fields.Many2one('agenda.materia.horario', string="Materia Horario", required=True)
+
+    asistencia_alumno_ids = fields.One2many('agenda.asistencia.alumno', 'asistencia_id', string="Asistencias")
