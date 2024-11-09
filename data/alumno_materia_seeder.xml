@@ -14,28 +14,11 @@
         <field name="materia_horario_id">2</field>
         <field name="alumno_id">3</field>
     </record>
-        
+
     <record id="alumno_materia_4" model="agenda.alumno.materia">
-        <field name="materia_horario_id">1</field>
-        <field name="alumno_id">5</field>
-    </record>
-
- 
-
-    <record id="alumno_materia_5" model="agenda.alumno.materia">
         <field name="materia_horario_id">2</field>
-        <field name="alumno_id">64</field>
+        <field name="alumno_id">1</field>
     </record>
-
-    <record id="alumno_materia_6" model="agenda.alumno.materia">
-        <field name="materia_horario_id">3</field>
-        <field name="alumno_id">64</field>
-    </record>
-
-    <record id="alumno_materia_7" model="agenda.alumno.materia">
-        <field name="materia_horario_id">2</field>
-        <field name="alumno_id">63</field>
-    </record>
-
+        
 
 </odoo>

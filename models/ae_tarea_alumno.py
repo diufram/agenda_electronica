@@ -10,7 +10,7 @@ class TareaAlumno(models.Model):
     archivo_datos = fields.Binary(string="Archivo Adjunto", attachment=True)
 
     tarea_id = fields.Many2one('agenda.tarea', string="Tarea", required=True)
-    alumno_id = fields.Many2one('res.users', string="Alumno", required=True) 
+    alumno_id = fields.Many2one('agenda.alumno', string="Alumno", required=True) 
 
 
 

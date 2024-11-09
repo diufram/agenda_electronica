@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Crear usuarios en res.users -->
+    <record id="user_apoderado_1" model="res.users">
+        <field name="name">Julio Cesar Fariani</field>
+        <field name="login">julio.fariani@example.com</field>
+        <field name="password">password123</field>
+    </record>
+    <record id="user_apoderado_2" model="res.users">
+        <field name="name">Fernanda Ocampos</field>
+        <field name="login">fernanda@example.com</field>
+        <field name="password">password123</field>
+    </record>
+    <record id="user_apoderado_3" model="res.users">
+        <field name="name">Francisco Castillo</field>
+        <field name="login">francisco@example.com</field>
+        <field name="password">password123</field>
+    </record>
+
+    <!-- Crear registros en agenda.apoderado -->
+    <record id="apoderado_1" model="agenda.apoderado">
+        <field name="user_id" ref="user_apoderado_1"/>
+        <field name="ci">4312342</field>
+    </record>
+    <record id="apoderado_2" model="agenda.apoderado">
+        <field name="user_id" ref="user_apoderado_2"/>
+        <field name="ci">5434354</field>
+    </record>
+    <record id="apoderado_3" model="agenda.apoderado">
+        <field name="user_id" ref="user_apoderado_3"/>
+        <field name="ci">66335243</field>
+    </record>
+</odoo>

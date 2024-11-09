@@ -1,6 +1,16 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_persona_user,access_persona_user,base.model_res_partner,base.group_user,1,0,0,0
-access_persona_manager,access_persona_manager,base.model_res_partner,base.group_system,1,1,1,1
+
+access_alumno_user,access_alumno_user,agenda_electronica.model_agenda_alumno,agenda_electronica.group_alumno,1,0,0,0
+access_alumno_manager,access_alumno_manager,agenda_electronica.model_agenda_alumno,agenda_electronica.group_administrador,1,1,1,1
+
+access_profesor_user,access_profesor_user,agenda_electronica.model_agenda_profesor,agenda_electronica.group_profesor,1,0,0,0
+access_profesor_manager,access_profesor_manager,agenda_electronica.model_agenda_profesor,agenda_electronica.group_administrador,1,1,1,1
+
+access_apoderado_user,access_apoderado_user,agenda_electronica.model_agenda_apoderado,agenda_electronica.group_apoderado,1,0,0,0
+access_apoderado_manager,access_apoderado_manager,agenda_electronica.model_agenda_apoderado,agenda_electronica.group_administrador,1,1,1,1
+
+access_administrador_user,access_administrador_user,agenda_electronica.model_agenda_administrador,agenda_electronica.group_administrador,1,1,1,1
+
 
 access_curso_user,access_curso_user,agenda_electronica.model_agenda_curso,base.group_user,1,0,0,0
 access_curso_manager,access_curso_manager,agenda_electronica.model_agenda_curso,base.group_system,1,1,1,1

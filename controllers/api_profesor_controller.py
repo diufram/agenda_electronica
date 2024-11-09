@@ -132,6 +132,21 @@ class ApiProfesorController(http.Controller):
 
         alumnos = request.env['agenda.alumno.materia'].sudo().search([('materia_horario_id', '=', materia_horario_id)])
 
+        apoderados_enviar = []
+        alumnos_enviar = []
+
+        for alumno in  alumnos:
+            if alumno.alumno_id.token:
+                alumnos_enviar.append(alumno.alumno_id.token)
+            if alumno.alumno_id.apoderado_ids.apoderado_id.token: 
+                apoderados_enviar.append(alumno.alumno_id.apoderado_ids.apoderado_id.token)
+
+        #PARA APODERADOS
+        self._send_notification(personas=apoderados_enviar, titulo= "Se le asigno una tarea a su Hijo, Titulo: "+ titulo, descripcion= "Descripcion: "+descripcion)
+
+        #PARA ALUMNOS
+        self._send_notification(personas=alumnos_enviar, titulo= "Se le asigno una tarea, Titulo: "+ titulo, descripcion= "Descripcion: "+descripcion)
+
         for alumno in  alumnos:
             request.env['agenda.tarea.alumno'].sudo().create({
             'tarea_id': tarea_creada.id,
@@ -147,16 +162,22 @@ class ApiProfesorController(http.Controller):
         )
 
 
-    @http.route('/send_notification/<int:materia_horario_id>', type='http', auth='public', methods=['POST'], csrf=False)
+    """ @http.route('/send_notification/<int:materia_horario_id>', type='http', auth='public', methods=['POST'], csrf=False)
     def send_notification(self, materia_horario_id,**kwargs):
         data = []
         alumnos = request.env['agenda.alumno.materia'].sudo().search([('materia_horario_id', '=', materia_horario_id)])
+
         for alumno in  alumnos:
             if alumno.alumno_id.token:
                 data.append(alumno.alumno_id.token)
+            if alumno.alumno_id.apoderado_ids.apoderado_id.token: 
+                data.append(alumno.alumno_id.apoderado_ids.apoderado_id.token)
+        
 
         print(data)
-        """ url = "https://api.onesignal.com/notifications"
+        titulo = "El profesor asigno una tarea"
+        descripcion = "Esta es la descripcion"
+        url = "https://api.onesignal.com/notifications"
         headers = {
             'Content-Type': 'application/json',
             'Authorization': 'Basic YTgzNWVlYzMtYmQ2ZS00ZjA1LWFmNzMtNTUyMmNmMzE5MTY5'  # Tu clave de API
@@ -165,11 +186,9 @@ class ApiProfesorController(http.Controller):
             "target_channel": "push",
             "included_segments": ["Subscribed Users"],
             "app_id": "bde019e1-c5b5-4852-9135-a829a99244b1",  # Tu ID de aplicación de OneSignal
-            "contents": {"en": "Esto es una prueba"},
-            "include_subscription_ids": [
-                "d9f11b54-e0a7-410c-a1d7-1a6dcc77fea1"  # ID de suscripción del destinatario
-            ],
-            "headings": {"en": "AA es la descripción"}
+            "contents": {"en": descripcion},
+            "include_subscription_ids": data,
+            "headings": {"en": titulo}
         }
 
         # Realiza la solicitud POST a OneSignal
@@ -203,3 +222,48 @@ class ApiProfesorController(http.Controller):
     def tomar_asistencia(self, idTareaAlumno, **kwargs):
         tarea_alumno = request.env['agenda.tarea.alumno'].sudo().browse(idTareaAlumno)
         tarea_alumno.write({'visto': True})
+
+
+
+    def _send_notification(self, personas, titulo, descripcion):
+
+        url = "https://api.onesignal.com/notifications"
+        headers = {
+            'Content-Type': 'application/json',
+            'Authorization': 'Basic YTgzNWVlYzMtYmQ2ZS00ZjA1LWFmNzMtNTUyMmNmMzE5MTY5'  # Tu clave de API
+        }
+        payload = {
+            "target_channel": "push",
+            "included_segments": ["Subscribed Users"],
+            "app_id": "bde019e1-c5b5-4852-9135-a829a99244b1",  # Tu ID de aplicación de OneSignal
+            "contents": {"en": descripcion},
+            "include_subscription_ids": personas,
+            "headings": {"en": titulo}
+        }
+
+        # Realiza la solicitud POST a OneSignal
+        try:
+            response = requests.post(url, headers=headers, data=json.dumps(payload))
+            response.raise_for_status()  # Verifica si hay errores HTTP
+
+            # Construye una respuesta válida para Odoo
+            return request.make_response(
+                json.dumps({
+                    'status': 'success',
+                    'message': 'Notificación enviada exitosamente',
+                    'response': response.json()
+                }),
+                headers={'Content-Type': 'application/json'}
+            )
+        except requests.exceptions.RequestException as e:
+            # Manejo de errores con una respuesta válida
+            return request.make_response(
+                json.dumps({
+                    'status': 'error',
+                    'message': 'Error al enviar la notificación',
+                    'details': str(e)
+                }),
+                headers={'Content-Type': 'application/json'},
+                status=500
+            )
+
