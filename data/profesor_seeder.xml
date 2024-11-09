@@ -1,33 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <!-- Crear usuarios en res.users -->
+    <!-- Crear usuarios en res.users y asignarlos al grupo Profesor -->
     <record id="user_profesor_1" model="res.users">
         <field name="name">Camila Justiniano Fariani</field>
         <field name="login">camila.just@example.com</field>
         <field name="password">password123</field>
+        <field name="groups_id" eval="[(4, ref('agenda_electronica.group_profesor'))]"/> <!-- Asignar al grupo Profesor -->
     </record>
     <record id="user_profesor_2" model="res.users">
         <field name="name">Flavia Campos</field>
         <field name="login">flavia@example.com</field>
         <field name="password">password123</field>
+        <field name="groups_id" eval="[(4, ref('agenda_electronica.group_profesor'))]"/> <!-- Asignar al grupo Profesor -->
     </record>
     <record id="user_profesor_3" model="res.users">
         <field name="name">Franco Azevedo</field>
         <field name="login">franc@example.com</field>
         <field name="password">password123</field>
+        <field name="groups_id" eval="[(4, ref('agenda_electronica.group_profesor'))]"/> <!-- Asignar al grupo Profesor -->
     </record>
 
     <!-- Crear registros en agenda.profesor -->
     <record id="profesor_1" model="agenda.profesor">
-        <field name="user_id" ref="user_profesor_1"/>
+        <field name="user_id" ref="user_profesor_1"/> <!-- Relación con el usuario -->
         <field name="ci">62532413</field>
     </record>
     <record id="profesor_2" model="agenda.profesor">
-        <field name="user_id" ref="user_profesor_2"/>
+        <field name="user_id" ref="user_profesor_2"/> <!-- Relación con el usuario -->
         <field name="ci">66868231</field>
     </record>
     <record id="profesor_3" model="agenda.profesor">
-        <field name="user_id" ref="user_profesor_3"/>
+        <field name="user_id" ref="user_profesor_3"/> <!-- Relación con el usuario -->
         <field name="ci">95654432</field>
     </record>
 </odoo>

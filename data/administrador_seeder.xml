@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Crear usuarios en res.users y asignarlos al grupo Administrador -->
+    <record id="user_admin_1" model="res.users">
+        <field name="name">Luis Alberto Sanchez</field>
+        <field name="login">luis.sanchez@example.com</field>
+        <field name="password">password123</field>
+        <field name="groups_id" eval="[(4, ref('agenda_electronica.group_administrador'))]"/> <!-- Asignar al grupo Administrador -->
+    </record>
+    <record id="user_admin_2" model="res.users">
+        <field name="name">Carla Gómez</field>
+        <field name="login">carla.gomez@example.com</field>
+        <field name="password">password123</field>
+        <field name="groups_id" eval="[(4, ref('agenda_electronica.group_administrador'))]"/> <!-- Asignar al grupo Administrador -->
+    </record>
+    <record id="user_admin_3" model="res.users">
+        <field name="name">Pedro Ruiz</field>
+        <field name="login">pedro.ruiz@example.com</field>
+        <field name="password">password123</field>
+        <field name="groups_id" eval="[(4, ref('agenda_electronica.group_administrador'))]"/> <!-- Asignar al grupo Administrador -->
+    </record>
+
+    <!-- Crear registros en agenda.administrador -->
+    <record id="admin_1" model="agenda.administrador">
+        <field name="user_id" ref="user_admin_1"/> <!-- Relación con el usuario -->
+    </record>
+    <record id="admin_2" model="agenda.administrador">
+        <field name="user_id" ref="user_admin_2"/> <!-- Relación con el usuario -->
+    </record>
+    <record id="admin_3" model="agenda.administrador">
+        <field name="user_id" ref="user_admin_3"/> <!-- Relación con el usuario -->
+    </record>
+</odoo>

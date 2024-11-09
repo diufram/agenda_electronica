@@ -1,0 +1,75 @@
+<odoo>
+    <record id="view_list_materia_horario" model="ir.ui.view">
+        <field name="name">agenda.materia.horario.list</field>
+        <field name="model">agenda.materia.horario</field>
+        <field name="arch" type="xml">
+            <list string="Materias Horarios">
+                <field name="materia_id"/>
+                <field name="curso_id"/>
+                <field name="horario_id"/>
+                <field name="profesor_id"/>
+                <field name="alumnos_ids" widget="many2many_tags"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_form_materia_horario" model="ir.ui.view">
+        <field name="name">agenda.materia.horario.form</field>
+        <field name="model">agenda.materia.horario</field>
+        <field name="arch" type="xml">
+            <form string="Detalles de Materia Horario">
+                <sheet>
+                    <group>
+                        <field name="materia_id"/>
+                        <field name="curso_id"/>
+                        <field name="horario_id"/>
+                        <field name="profesor_id"/>
+                    </group>
+                    <notebook>
+                        <page string="Alumnos">
+                            <field name="alumnos_ids">
+                                <list>
+                                    <field name="alumno_id"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_kanban_materia_horario" model="ir.ui.view">
+        <field name="name">agenda.materia.horario.kanban</field>
+        <field name="model">agenda.materia.horario</field>
+        <field name="arch" type="xml">
+            <kanban string="Materias Horarios">
+                <field name="materia_id"/>
+                <field name="curso_id"/>
+                <field name="horario_id"/>
+                <field name="profesor_id"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="o_kanban_record">
+                            <div class="oe_kanban_details">
+                                <!-- Materia -->
+                                <strong>
+                                    <field name="materia_id"/>
+                                </strong>
+                                <!-- Profesor -->
+                                <div>Profesor: <field name="profesor_id"/></div>
+                                <!-- Curso -->
+                                <div>Curso: <field name="curso_nombre"/></div>
+                                <!-- Horario -->
+                                <div>Horario: <field name="horario_id"/></div>
+                                <!-- Alumnos -->
+                                <div>Total Alumnos: <field name="alumnos_ids" widget="many2many_tags"/></div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    
+</odoo>

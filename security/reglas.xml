@@ -1,0 +1,12 @@
+<odoo>
+    <!-- Regla para que los alumnos solo vean las materias asignadas -->
+    <record id="rule_materia_horario_alumno" model="ir.rule">
+        <field name="name">Materias Horarios - Alumno</field>
+        <field name="model_id" ref="agenda_electronica.model_agenda_materia_horario"/> <!-- Modelo relacionado -->
+        <field name="groups" eval="[(4, ref('agenda_electronica.group_alumno'))]"/> <!-- Solo para alumnos -->
+        <field name="domain_force">[
+            ('alumnos_ids.alumno_id.user_id', '=', user.id)
+        ]</field>
+    </record>
+    
+</odoo>

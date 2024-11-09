@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Crear una nueva categoría de módulo para los grupos escolares -->
+    <record id="module_category_school_users" model="ir.module.category">
+        <field name="name">School Users</field>
+        <field name="description">Categoría personalizada para los grupos del módulo escolar.</field>
+        <field name="sequence">10</field>
+    </record>
+
+    <!-- Grupo para Alumno -->
+    <record id="group_alumno" model="res.groups">
+        <field name="name">Alumno</field>
+        <field name="category_id" ref="agenda_electronica.module_category_school_users"/> <!-- Nueva categoría -->
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/> <!-- Hereda permisos básicos de usuario interno -->
+    </record>
+
+    <!-- Grupo para Profesor -->
+    <record id="group_profesor" model="res.groups">
+        <field name="name">Profesor</field>
+        <field name="category_id" ref="agenda_electronica.module_category_school_users"/> <!-- Nueva categoría -->
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/> <!-- Hereda permisos básicos de usuario interno -->
+    </record>    
+
+    <!-- Grupo para Apoderado -->
+    <record id="group_apoderado" model="res.groups">
+        <field name="name">Apoderado</field>
+        <field name="category_id" ref="agenda_electronica.module_category_school_users"/> <!-- Nueva categoría -->
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/> <!-- Hereda permisos básicos de usuario interno -->
+    </record>
+
+    <!-- Grupo para Administrador -->
+    <record id="group_administrador" model="res.groups">
+        <field name="name">Administrador</field>
+        <field name="category_id" ref="agenda_electronica.module_category_school_users"/> <!-- Mover a categoría personalizada -->
+        <field name="implied_ids" eval="[(4, ref('base.group_erp_manager'))]"/> <!-- Hereda permisos avanzados -->
+    </record>
+</odoo>

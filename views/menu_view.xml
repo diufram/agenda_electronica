@@ -15,7 +15,30 @@
         <field name="view_mode">list,form</field>
     </record>
 
-    <!-- Menú de Materias -->
-    <menuitem id="menu_agenda_materia" name="Materias" parent="menu_agenda_root" action="action_agenda_materia"/>
-    <menuitem id="menu_agenda_curso" name="Cursos" parent="menu_agenda_root" action="action_agenda_curso"/>
+    <record id="action_materia_horario_alumno" model="ir.actions.act_window">
+        <field name="name">Mis Materias</field>
+        <field name="res_model">agenda.materia.horario</field>
+        <field name="view_mode">kanban</field>
+        <field name="groups_id" eval="[(4, ref('agenda_electronica.group_alumno'))]"/>
+    </record>
+    
+
+    <!-- Menú de Opciones -->
+    <menuitem id="menu_agenda_materia" 
+            name="Materias" 
+            parent="menu_agenda_root" 
+            action="action_agenda_materia" 
+            groups="agenda_electronica.group_administrador,agenda_electronica.group_profesor,agenda_electronica.group_alumno"/>
+
+    <menuitem id="menu_agenda_curso" 
+            name="Cursos" 
+            parent="menu_agenda_root" 
+            action="action_agenda_curso"  
+            groups="agenda_electronica.group_administrador,agenda_electronica.group_profesor,agenda_electronica.group_alumno"/>
+
+    <menuitem id="menu_materias_horarios_alumno"
+            name="Mis Materias"
+            parent="menu_agenda_root"
+            action="action_materia_horario_alumno"
+            groups="agenda_electronica.group_alumno"/>
 </odoo>
