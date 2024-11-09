@@ -9,4 +9,5 @@ class Curso(models.Model):
     paralelo = fields.Char(string="Paralelo")
 
     materia_horarios_ids = fields.One2many('agenda.materia.horario', 'curso_id', string="Cursos")
+    alumnos_ids = fields.One2many('agenda.alumno.curso', 'curso_id', string="Alumnos del Curso")
 

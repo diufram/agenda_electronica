@@ -11,7 +11,7 @@
     'data': [
         'security/grupos.xml',
         'security/ir.model.access.csv',
-        'security/reglas.xml',
+        #'security/reglas.xml',
         'data/curso_seeder.xml',
         'data/administrador_seeder.xml',
         'data/horario_seeder.xml',
@@ -20,11 +20,11 @@
         'data/profesor_seeder.xml',
         'data/apoderado_seeder.xml',
         'data/materia_horario_seeder.xml',
-        'data/alumno_materia_seeder.xml',
+        'data/alumno_curso_seeder.xml',
         'data/apoderado_alumno_seeder.xml',
         'views/materia_view.xml',
         'views/curso_view.xml',
-        'views/mis_materias.xml',
+        #'views/mis_materias.xml',
         'views/menu_view.xml',
         
     ],

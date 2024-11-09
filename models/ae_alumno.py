@@ -12,7 +12,7 @@ class Alumno(models.Model):
     apoderado_ids = fields.One2many('agenda.apoderado.alumno', 'alumno_id', string="Apoderados a Cargo")
     asistencia_ids = fields.One2many('agenda.asistencia.alumno', 'alumno_id', string="Asistencias")
     tareas_ids = fields.One2many('agenda.tarea.alumno', 'alumno_id', string="Tareas")
-    materia_horarios_ids = fields.One2many('agenda.alumno.materia', 'alumno_id', string="Materias y Horarios")
+    cursos_ids = fields.One2many('agenda.alumno.curso', 'alumno_id', string="Cursos del Alumno")
 
     @api.model_create_multi
     def create(self, vals_list):

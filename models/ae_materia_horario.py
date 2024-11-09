@@ -16,4 +16,3 @@ class MateriaHorario(models.Model):
 
     asistencia_ids = fields.One2many('agenda.asistencia', 'materia_horario_id', string="Asistencias")
 
-    alumnos_ids = fields.One2many('agenda.alumno.materia', 'materia_horario_id', string="Alumnos")
