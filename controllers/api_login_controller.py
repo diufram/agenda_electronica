@@ -6,7 +6,6 @@ class ApiLoginController(http.Controller):
 
     @http.route('/api/login', type='http', auth='public', methods=['POST'], csrf=False)
     def api_login(self, **kwargs):
-        import json
 
         # Leer el JSON desde la solicitud HTTP
         data = json.loads(request.httprequest.data.decode('utf-8'))

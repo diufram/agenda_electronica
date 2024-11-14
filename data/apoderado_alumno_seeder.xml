@@ -8,4 +8,6 @@
         <field name="apoderado_id">1</field>
         <field name="alumno_id">2</field>
     </record>
+
+    
 </odoo>
