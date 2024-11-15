@@ -190,4 +190,3 @@ Por favor, devuelve **solo el JSON** sin explicaciones ni texto adicional.
             mimetype='application/json'
         )
         
-        

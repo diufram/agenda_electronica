@@ -1,4 +1,3 @@
-
 from odoo import http
 from odoo.http import request
 import json
@@ -100,4 +99,4 @@ class ApiApoderadoController(http.Controller):
             status=200,
             mimetype='application/json'
         )
-       
+        

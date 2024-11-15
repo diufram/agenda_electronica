@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-   <record id="horario_1" model="agenda.horario">
+    <record id="horario_1" model="agenda.horario">
         <field name="hora_inicio">07:00</field>
         <field name="hora_fin">08:00</field>
     </record>
@@ -27,3 +27,4 @@
         <field name="hora_fin">13:00</field>
     </record>
 </odoo>
+

@@ -1,3 +1,4 @@
+
 from odoo import models, fields, api
 
 class AsistenciaAlumno(models.Model):
@@ -7,4 +8,5 @@ class AsistenciaAlumno(models.Model):
     estado = fields.Boolean(string= "Estado")
 
     asistencia_id = fields.Many2one('agenda.asistencia', string="Asistencia", required=True)
+    
     alumno_id = fields.Many2one('agenda.alumno', string="Alumno", required=True)

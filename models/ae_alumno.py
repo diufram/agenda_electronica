@@ -8,7 +8,7 @@ class Alumno(models.Model):
     ci = fields.Char(string="CI", help="Carnet de Identidad")
     token = fields.Char(string="Token", help="Token del Dispositivo")
     user_id = fields.Many2one('res.users', required=True, ondelete="cascade")
-
+    horario_generado = fields.Json(string="Horario Generado")
     apoderado_ids = fields.One2many('agenda.apoderado.alumno', 'alumno_id', string="Apoderados a Cargo")
     asistencia_ids = fields.One2many('agenda.asistencia.alumno', 'alumno_id', string="Asistencias")
     tareas_ids = fields.One2many('agenda.tarea.alumno', 'alumno_id', string="Tareas")
@@ -30,3 +30,4 @@ class Alumno(models.Model):
 
         # Llama al método original para procesar los registros
         return super(Alumno, self).create(vals_list)
+
