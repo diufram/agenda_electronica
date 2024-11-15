@@ -1,0 +1,44 @@
+<odoo>
+    <data>
+        <!-- Vista de Lista (Tree View) para Asistencia -->
+        <record id="view_agenda_asistencia_tree" model="ir.ui.view">
+            <field name="name">agenda.asistencia.tree</field>
+            <field name="model">agenda.asistencia</field>
+            <field name="arch" type="xml">
+                <tree string="Asistencia" editable="bottom">
+                    <field name="fecha"/>
+                    <field name="materia_horario_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Vista de Formulario (Form View) para Asistencia -->
+        <record id="view_agenda_asistencia_form" model="ir.ui.view">
+            <field name="name">agenda.asistencia.form</field>
+            <field name="model">agenda.asistencia</field>
+            <field name="arch" type="xml">
+                <form string="Asistencia">
+                    <sheet>
+                        <group>
+                            <field name="fecha"/>
+                            <field name="materia_horario_id"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Vista de Búsqueda (Search View) para Asistencia -->
+        <record id="view_agenda_asistencia_search" model="ir.ui.view">
+            <field name="name">agenda.asistencia.search</field>
+            <field name="model">agenda.asistencia</field>
+            <field name="arch" type="xml">
+                <search string="Buscar Asistencia">
+                    <field name="fecha" string="Fecha"/>
+                    <field name="materia_horario_id" string="Materia Horario"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- Acción de Ventana para Asistencia -->
+        <record id="action_agenda_asistencia" model="i

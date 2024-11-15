@@ -1,0 +1,29 @@
+<odoo>
+    <record id="view_alumno_curso_list" model="ir.ui.view">
+        <field name="name">Alumno Curso list</field>
+        <field name="model">agenda.alumno.curso</field>
+        <field name="arch" type="xml">
+            <list string="Alumno Curso">
+                <field name="curso_id"/>
+                <field name="alumno_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_alumno_curso_form" model="ir.ui.view">
+        <field name="name">Alumno Curso Form</field>
+        <field name="model">agenda.alumno.curso</field>
+        <field name="arch" type="xml">
+            <form string="Alumno Curso">
+                <sheet>
+                    <group>
+                        <field name="curso_id" required="1"/>
+                        <field name="alumno_id" required="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    
+</odoo>

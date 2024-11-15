@@ -1,0 +1,99 @@
+<odoo>
+    <data>
+        <!-- Vista de Lista (Tree View) para Materia -->
+        <record id="view_agenda_materia_tree" model="ir.ui.view">
+            <field name="name">agenda.materia.tree</field>
+            <field name="model">agenda.materia</field>
+            <field name="arch" type="xml">
+                <tree string="Materias" editable="bottom">
+                    <field name="nombre"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Vista de Formulario (Form View) para Materia -->
+        <record id="view_agenda_materia_form" model="ir.ui.view">
+            <field name="name">agenda.materia.form</field>
+            <field name="model">agenda.materia</field>
+            <field name="arch" type="xml">
+                <form string="Materia">
+                    <sheet>
+                        <group>
+                            <field name="nombre"/>
+                        </group>
+                        <notebook>
+                            <page string="Horarios">
+                                <field name="horario_ids">
+                                    <tree string="Horarios de Materia">
+                                        <field name="horario_id" string="Horario"/>
+                                        <field name="curso_id" string="Curso"/>
+                                        <field name="profesor_id" string="Profesor"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Asistencias">
+                                <field name="horario_ids">
+                                    <tree string="Asistencias">
+                                        <field name="asistencia_ids">
+                                            <tree string="Asistencias">
+                                                <field name="fecha"/>
+                                                <field name="materia_horario_id" string="Horario de Materia"/>
+                                            </tree>
+                                        </field>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Tareas">
+                                <field name="horario_ids">
+                                    <tree string="Tareas Asignadas">
+                                        <field name="tarea_ids">
+                                            <tree string="Tareas">
+                                                <field name="nombre"/>
+                                                <field name="descripcion"/>
+                                                <field name="fecha_entrega"/>
+                                            </tree>
+                                        </field>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Alumnos">
+                                <field name="horario_ids">
+                                    <tree string="Alumnos Inscritos">
+                                        <field name="alumnos_ids">
+                                            <tree string="Alumnos">
+                                                <field name="alumno_id" string="Alumno"/>
+                                            </tree>
+                                        </field>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Vista de Búsqueda (Search View) para Materia -->
+        <record id="view_agenda_materia_search" model="ir.ui.view">
+            <field name="name">agenda.materia.search</field>
+            <field name="model">agenda.materia</field>
+            <field name="arch" type="xml">
+                <search string="Buscar Materias">
+                    <field name="nombre" string="Nombre"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- Acción de Ventana para Materia -->
+        <record id="action_agenda_materia" model="ir.actions.act_window">
+            <field name="name">Materias</field>
+            <field name="res_model">agenda.materia</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_agenda_materia_search"/>
+        </record>
+
+        <!-- Menú para Materia -->
+        <menuitem id="menu_agenda_materia_root" name="Configuración Académica" sequence="1"/>
+        <menuitem id="menu_agenda_materia" name="Materias" parent="menu_agenda_materia_root" action="action_agenda_materia" sequence="2"/>
+    </data>
+</odoo>

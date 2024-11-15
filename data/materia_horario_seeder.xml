@@ -10,21 +10,21 @@
     <record id="materia_horario_2" model="agenda.materia.horario">
         <field name="materia_id">2</field>
         <field name="horario_id">2</field>
-        <field name="curso_id">2</field>
+        <field name="curso_id">1</field>
         <field name="profesor_id">1</field>
     </record>
 
     <record id="materia_horario_3" model="agenda.materia.horario">
         <field name="materia_id">3</field>
         <field name="horario_id">3</field>
-        <field name="curso_id">3</field>
+        <field name="curso_id">1</field>
         <field name="profesor_id">1</field>
     </record>
 
     <record id="materia_horario_4" model="agenda.materia.horario">
         <field name="materia_id">4</field>
-        <field name="horario_id">5</field>
-        <field name="curso_id">2</field>
+        <field name="horario_id">4</field>
+        <field name="curso_id">1</field>
         <field name="profesor_id">1</field>
     </record>
 

@@ -13,16 +13,15 @@ class ApiApoderadoController(http.Controller):
 
         for alumno in alumnos_from_apoderado:
 
-            curso = request.env['agenda.alumno.materia'].sudo().search([('alumno_id', '=', alumno.alumno_id.id)], limit=1)
+            curso = request.env['agenda.alumno.curso'].sudo().search([('alumno_id', '=', alumno.alumno_id.id)], limit=1)
             if curso:
                 data.append({
                     'alumno_id': alumno.alumno_id.id,
                     'alumno_nombre': alumno.alumno_id.name,
                     #'curso_paralelo': curso.paralelo,
-                    'curso_nombre':curso.materia_horario_id.curso_id.nombre + " " + curso.materia_horario_id.curso_id.paralelo,
+                    'curso_nombre':curso.curso_id.nombre + " " + curso.curso_id.paralelo,
                 })
             
-
         # Devolver los datos en formato JSON
         return http.Response(
             json.dumps(data),
@@ -34,14 +33,15 @@ class ApiApoderadoController(http.Controller):
     @http.route('/api/apoderado/materias/<int:alumno_id>', type='http', auth='public', methods=['GET'], csrf=False)
     def getMateriasFromAlumno(self, alumno_id, **kwargs):
        
-        alumno_materias = request.env['agenda.alumno.materia'].sudo().search([('alumno_id', '=', alumno_id)])
+        alumno_curso = request.env['agenda.alumno.curso'].sudo().search([('alumno_id', '=', alumno_id)])
+        alumno_materias = alumno_curso.curso_id.materia_horarios_ids
         data = []
 
         for alumno_materia in alumno_materias:
             data.append({
-                'id': alumno_materia.materia_horario_id.id, 
-                'materia_nombre': alumno_materia.materia_horario_id.materia_id.nombre,
-                'profesor_nombre': alumno_materia.materia_horario_id.profesor_id.name,  
+                'id': alumno_materia.id, 
+                'materia_nombre': alumno_materia.materia_id.nombre,
+                'profesor_nombre': alumno_materia.profesor_id.name,  
             })
      
         return http.Response(
@@ -100,4 +100,4 @@ class ApiApoderadoController(http.Controller):
             status=200,
             mimetype='application/json'
         )
-        
+       

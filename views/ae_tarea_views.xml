@@ -1,0 +1,76 @@
+<odoo>
+    <data>
+        <!-- Vista de Lista (Tree View) para Tarea -->
+        <record id="view_agenda_tarea_tree" model="ir.ui.view">
+            <field name="name">agenda.tarea.tree</field>
+            <field name="model">agenda.tarea</field>
+            <field name="arch" type="xml">
+                <tree string="Tareas" editable="bottom">
+                    <field name="titulo"/>
+                    <field name="descripcion"/>
+                    <field name="fecha_presentacion"/>
+                    <field name="materia_horario_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Vista de Formulario (Form View) para Tarea -->
+        <record id="view_agenda_tarea_form" model="ir.ui.view">
+            <field name="name">agenda.tarea.form</field>
+            <field name="model">agenda.tarea</field>
+            <field name="arch" type="xml">
+                <form string="Tarea">
+                    <sheet>
+                        <group>
+                            <field name="titulo"/>
+                            <field name="materia_horario_id"/>
+                            <field name="fecha_presentacion"/>
+                        </group>
+                        <group>
+                            <field name="descripcion"/>
+                            <field name="archivo_nombre"/>
+                            <field name="archivo_datos" filename="archivo_nombre"/>
+                        </group>
+                        <notebook>
+                            <page string="Alumnos">
+                                <field name="alumno_ids">
+                                    <tree string="Alumnos">
+                                        <field name="alumno_id"/>
+                                        <field name="estado"/>
+                                        <field name="visto"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Vista de Búsqueda (Search View) para Tarea -->
+        <record id="view_agenda_tarea_search" model="ir.ui.view">
+            <field name="name">agenda.tarea.search</field>
+            <field name="model">agenda.tarea</field>
+            <field name="arch" type="xml">
+                <search string="Buscar Tareas">
+                    <field name="titulo" string="Título"/>
+                    <field name="materia_horario_id" string="Materia Horario"/>
+                    <filter string="Presentación Pendiente" name="filter_pending" domain="[('fecha_presentacion', '>', context_today())]"/>
+                    <filter string="Presentación Vencida" name="filter_overdue" domain="[('fecha_presentacion', '<', context_today())]"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- Acción de Ventana para Tarea -->
+        <record id="action_agenda_tarea" model="ir.actions.act_window">
+            <field name="name">Tareas</field>
+            <field name="res_model">agenda.tarea</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_agenda_tarea_search"/>
+        </record>
+
+        <!-- Menú para Tarea -->
+        <menuitem id="menu_agenda_tarea_root" name="Configuración Académica" sequence="1"/>
+        <menuitem id="menu_agenda_tarea" name="Tareas" parent="menu_agenda_tarea_root" action="action_agenda_tarea" sequence="2"/>
+    </data>
+</odoo>

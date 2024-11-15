@@ -38,10 +38,11 @@ class ApiProfesorController(http.Controller):
         profe_materia_horario = request.env['agenda.materia.horario'].sudo().search([('profesor_id', '=', profesor_id),('curso_id', '=', int(curso_id))])
         
         data = []
+        cantidad_alumnos = request.env['agenda.alumno.curso'].sudo().search_count([('curso_id', '=', curso_id)])
         for alumno_materia in profe_materia_horario:
             materia = alumno_materia.materia_id
             horario = alumno_materia.horario_id
-            cantidad_alumnos = request.env['agenda.alumno.materia'].sudo().search_count([('materia_horario_id', '=', alumno_materia.id)])
+            
             data.append({
                 'id': alumno_materia.id, 
                 'materia_nombre': materia.nombre,
@@ -83,8 +84,9 @@ class ApiProfesorController(http.Controller):
     @http.route('/api/profesor/asistencia/<int:materia_horario_id>', type='http', auth='public', methods=['GET'], csrf=False)
     def get_alumnos_materia_for_asistencia(self, materia_horario_id ,**kwargs):
         # Filtramos por el profesor_id pasado como parámetro
-        alumnos_materia = request.env['agenda.alumno.materia'].sudo().search([('materia_horario_id', '=', materia_horario_id)])
-  
+        materia_horario = request.env['agenda.materia.horario'].sudo().search([('id', '=', materia_horario_id)])
+        curso_id= materia_horario.curso_id.id
+        alumnos_materia = request.env['agenda.alumno.curso'].sudo().search([('curso_id', '=', curso_id)])
         data = []
         for alumno in alumnos_materia:
 
@@ -130,12 +132,14 @@ class ApiProfesorController(http.Controller):
             'archivo_datos': archivo_datos,
         })
 
-        alumnos = request.env['agenda.alumno.materia'].sudo().search([('materia_horario_id', '=', materia_horario_id)])
+        materia_horario = request.env['agenda.materia.horario'].sudo().search([('id', '=', materia_horario_id)])
+        curso_id= materia_horario.curso_id.id
+        alumnos_materia = request.env['agenda.alumno.curso'].sudo().search([('curso_id', '=', curso_id)])
 
         apoderados_enviar = []
         alumnos_enviar = []
 
-        for alumno in  alumnos:
+        for alumno in  alumnos_materia:
             if alumno.alumno_id.token:
                 alumnos_enviar.append(alumno.alumno_id.token)
             if alumno.alumno_id.apoderado_ids.apoderado_id.token: 
@@ -147,7 +151,7 @@ class ApiProfesorController(http.Controller):
         #PARA ALUMNOS
         self._send_notification(personas=alumnos_enviar, titulo= "Se le asigno una tarea, Titulo: "+ titulo, descripcion= "Descripcion: "+descripcion)
 
-        for alumno in  alumnos:
+        for alumno in  alumnos_materia:
             request.env['agenda.tarea.alumno'].sudo().create({
             'tarea_id': tarea_creada.id,
             'alumno_id': alumno.alumno_id.id,
@@ -161,67 +165,30 @@ class ApiProfesorController(http.Controller):
             status=200
         )
 
+    @http.route('/api/profesor/tomar/asistencia/<int:materia_horario_id>',type='http', auth='public', methods=['POST'], csrf=False)
+    def tomar_asistencia(self, materia_horario_id, **kwargs):
+        data = json.loads(request.httprequest.data.decode('utf-8'))
+        alumnos_id = data.get('alumnos_id')
 
-    """ @http.route('/send_notification/<int:materia_horario_id>', type='http', auth='public', methods=['POST'], csrf=False)
-    def send_notification(self, materia_horario_id,**kwargs):
-        data = []
-        alumnos = request.env['agenda.alumno.materia'].sudo().search([('materia_horario_id', '=', materia_horario_id)])
+        materia_horario = request.env['agenda.materia.horario'].sudo().search([('id', '=', materia_horario_id)])
+        curso_id= materia_horario.curso_id.id
+        alumnos_materia = request.env['agenda.alumno.curso'].sudo().search([('curso_id', '=', curso_id)])
+        asistencia = request.env['agenda.asistencia'].sudo().create({
+            'materia_horario_id': materia_horario_id,
+        })
 
-        for alumno in  alumnos:
-            if alumno.alumno_id.token:
-                data.append(alumno.alumno_id.token)
-            if alumno.alumno_id.apoderado_ids.apoderado_id.token: 
-                data.append(alumno.alumno_id.apoderado_ids.apoderado_id.token)
+        for alumno in  alumnos_materia:
+            request.env['agenda.asistencia.alumno'].sudo().create({
+            'estado': alumno.alumno_id.id in  alumnos_id,
+            'alumno_id': alumno.alumno_id.id,
+            'asistencia_id': asistencia.id
+        })
+        return http.Response(
+            json.dumps({'status': 'success', 'asistencia': asistencia.id}),
+            content_type='application/json',
+            status=200
+        )
         
-
-        print(data)
-        titulo = "El profesor asigno una tarea"
-        descripcion = "Esta es la descripcion"
-        url = "https://api.onesignal.com/notifications"
-        headers = {
-            'Content-Type': 'application/json',
-            'Authorization': 'Basic YTgzNWVlYzMtYmQ2ZS00ZjA1LWFmNzMtNTUyMmNmMzE5MTY5'  # Tu clave de API
-        }
-        payload = {
-            "target_channel": "push",
-            "included_segments": ["Subscribed Users"],
-            "app_id": "bde019e1-c5b5-4852-9135-a829a99244b1",  # Tu ID de aplicación de OneSignal
-            "contents": {"en": descripcion},
-            "include_subscription_ids": data,
-            "headings": {"en": titulo}
-        }
-
-        # Realiza la solicitud POST a OneSignal
-        try:
-            response = requests.post(url, headers=headers, data=json.dumps(payload))
-            response.raise_for_status()  # Verifica si hay errores HTTP
-
-            # Construye una respuesta válida para Odoo
-            return request.make_response(
-                json.dumps({
-                    'status': 'success',
-                    'message': 'Notificación enviada exitosamente',
-                    'response': response.json()
-                }),
-                headers={'Content-Type': 'application/json'}
-            )
-        except requests.exceptions.RequestException as e:
-            # Manejo de errores con una respuesta válida
-            return request.make_response(
-                json.dumps({
-                    'status': 'error',
-                    'message': 'Error al enviar la notificación',
-                    'details': str(e)
-                }),
-                headers={'Content-Type': 'application/json'},
-                status=500
-            ) """
-
-
-    @http.route('/api/apoderado/asistencia/<int:idTareaAlumno>', type='http', auth='public', methods=['GET'], csrf=False)
-    def tomar_asistencia(self, idTareaAlumno, **kwargs):
-        tarea_alumno = request.env['agenda.tarea.alumno'].sudo().browse(idTareaAlumno)
-        tarea_alumno.write({'visto': True})
 
 
 
@@ -266,4 +233,79 @@ class ApiProfesorController(http.Controller):
                 headers={'Content-Type': 'application/json'},
                 status=500
             )
+ 
+    @http.route('/api/profesor/asistencias/<int:materia_horario_id>',type='http', auth='public', methods=['GET'], csrf=False)
+    def get_asistencias_from_materia(self, materia_horario_id, **kwargs):
+        data = []
 
+        asistencias = request.env['agenda.asistencia'].sudo().search([('materia_horario_id', '=', materia_horario_id)])
+        
+        for asistencia in asistencias:
+            cantidad_presentes = request.env['agenda.asistencia.alumno'].sudo().search_count([('asistencia_id', '=', asistencia.id),('estado', '=', True)])
+            data.append({
+                'asistencia_id': asistencia.id,
+                'fecha': asistencia.fecha.isoformat(), 
+                'cant_alumnos_presentes': cantidad_presentes
+
+            })
+
+        return http.Response(
+            json.dumps(data),
+            status=200,
+            mimetype='application/json'
+        )
+    
+    @http.route('/api/profesor/tareas-presentadas/<int:tarea_id>',type='http', auth='public', methods=['GET'], csrf=False)
+    def get_tareas_presentadas_tarea(self, tarea_id, **kwargs):
+        tareas = request.env['agenda.tarea.alumno'].sudo().search([('tarea_id', '=', tarea_id),('estado','=',True)])
+        data = []
+        for tarea in tareas:
+            data.append({
+                'tarea_alumno_id': tarea.id,
+                'alumno_nombre': tarea.alumno_id.name,
+                'archivo_nombre':tarea.archivo_nombre,  
+                'nota': tarea.nota
+            })
+
+        return http.Response(
+            json.dumps(data),
+            status=200,
+            mimetype='application/json'
+        )
+    
+
+    @http.route('/api/profesor/tarea-alumno/<int:tarea_alumno_id>', type='http', auth='public', methods=['GET'], csrf=False)
+    def get_tarea(self, tarea_alumno_id, **kwargs):
+        # Obtener el registro de la tarea por su ID
+        tarea = request.env['agenda.tarea.alumno'].sudo().search([('id', '=', tarea_alumno_id)], limit=1)
+        
+
+        # Convertir el archivo adjunto a formato base64 si existe
+        archivo_datos = tarea.archivo_datos.decode('utf-8') if tarea.archivo_datos else None
+
+        # Preparar los datos para la respuesta
+        tarea_data = {
+
+            'archivo_nombre': tarea.archivo_nombre,
+            'archivo_datos': archivo_datos,  # Archivo en base64 para ser mostrado en la respuesta
+        }
+
+        # Devolver los datos en formato JSON
+        return http.Response(
+            json.dumps({'status': 'success', 'tarea': tarea_data}),
+            content_type='application/json',
+            status=200
+        )
+
+    @http.route('/api/profesor/asignar/<int:tarea_alumno_id>/nota',type='http', auth='public', methods=['POST'], csrf=False)
+    def asignar_nota(self, tarea_alumno_id, **kwargs):
+        tarea_alumno = request.env['agenda.tarea.alumno'].sudo().browse(tarea_alumno_id)
+        print(tarea_alumno.nota)
+        data = json.loads(request.httprequest.data.decode('utf-8'))
+        nota = data.get('nota')
+        tarea_alumno.write({'nota': nota})
+        return http.Response(   
+            json.dumps({'status': 'success'}),
+            content_type='application/json',
+            status=200
+        )

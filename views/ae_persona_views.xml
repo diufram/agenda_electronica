@@ -1,0 +1,90 @@
+<odoo>
+    <data>
+        <!-- Vista de Formulario (Form View) para Persona -->
+        <record id="view_persona_form" model="ir.ui.view">
+            <field name="name">persona.form</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="arch" type="xml">
+                <sheet position="inside">
+                    <group>
+                        <field name="es_administrador"/>
+                        <field name="es_profesor"/>
+                        <field name="es_apoderado"/>
+                        <field name="es_alumno"/>
+                    </group>
+                    <group>
+                        <field name="ci"/>
+                        <field name="token"/>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+                <notebook position="inside">
+                    <page string="Alumno">
+                        <field name="alumno_ids">
+                            <tree string="Alumnos">
+                                <field name="apoderado_id"/>
+                            </tree>
+                        </field>
+                    </page>
+                    <page string="Apoderado">
+                        <field name="apoderado_ids">
+                            <tree string="Apoderados">
+                                <field name="alumno_id"/>
+                            </tree>
+                        </field>
+                    </page>
+                    <page string="Notificaciones">
+                        <field name="notificaciones_ids">
+                            <tree string="Notificaciones">
+                                <field name="titulo"/>
+                                <field name="mensaje"/>
+                            </tree>
+                        </field>
+                    </page>
+                    <page string="Materias Profesor">
+                        <field name="materia_horario_ids">
+                            <tree string="Materias Profesor">
+                                <field name="materia_id"/>
+                                <field name="horario_id"/>
+                                <field name="curso_id"/>
+                            </tree>
+                        </field>
+                    </page>
+                    <page string="Materias Alumno">
+                        <field name="materia_horarios_ids">
+                            <tree string="Materias Alumno">
+                                <field name="materia_horario_id"/>
+                            </tree>
+                        </field>
+                    </page>
+                    <page string="Tareas">
+                        <field name="tareas_ids">
+                            <tree string="Tareas">
+                                <field name="nombre"/>
+                                <field name="fecha_entrega"/>
+                                <field name="estado"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+
+        <!-- Vista de Lista (Tree View) para Persona -->
+        <record id="view_persona_tree" model="ir.ui.view">
+            <field name="name">persona.tree</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_tree"/>
+            <field name="arch" type="xml">
+                <field name="es_administrador" position="after">
+                    <field name="es_profesor"/>
+                    <field name="es_apoderado"/>
+                    <field name="es_alumno"/>
+                    <field name="ci"/>
+                    <field name="name"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

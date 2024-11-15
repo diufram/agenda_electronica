@@ -2,20 +2,23 @@ from odoo import http
 from odoo.http import request
 import json
 import base64
+import requests
+import re
 
 class ApiAlumnoController(http.Controller):
     # Definir una ruta para obtener todos los cursos
     @http.route('/api/alumno/materias/<int:alumno_id>', type='http', auth='public', methods=['GET'], csrf=False)
     def getMateriasFromAlumno(self, alumno_id, **kwargs):
        
-        alumno_materias = request.env['agenda.alumno.materia'].sudo().search([('alumno_id', '=', alumno_id)])
+        alumno_curso = request.env['agenda.alumno.curso'].sudo().search([('alumno_id', '=', alumno_id)])
+        alumno_materias = alumno_curso.curso_id.materia_horarios_ids
         data = []
 
         for alumno_materia in alumno_materias:
             data.append({
-                'id': alumno_materia.materia_horario_id.id, 
-                'materia_nombre': alumno_materia.materia_horario_id.materia_id.nombre,
-                'profesor_nombre': alumno_materia.materia_horario_id.profesor_id.name,  
+                'id': alumno_materia.id, 
+                'materia_nombre': alumno_materia.materia_id.nombre,
+                'profesor_nombre': alumno_materia.profesor_id.name,  
             })
      
         return http.Response(
@@ -97,3 +100,94 @@ class ApiAlumnoController(http.Controller):
             content_type='application/json',
             status=200
         )
+    
+
+    @http.route('/api/alumno/generar-horario/<int:alumno_id>', type='http', auth='public', methods=['POST'], csrf=False)
+    def generar_horario_con_ia(self, alumno_id, **kwargs):
+        alumno = request.env['agenda.alumno.curso'].sudo().search([('alumno_id','=',alumno_id)])
+        curso_id = alumno.curso_id.id
+        materias_horarios = request.env['agenda.materia.horario'].sudo().search([('curso_id','=',curso_id)])
+        data = []
+
+        for materia_horario in materias_horarios:
+            data.append({
+                'Materia': materia_horario.materia_id.nombre,
+                'hora_inicio': materia_horario.horario_id.hora_inicio,
+                'hora_fin':  materia_horario.horario_id.hora_fin,
+            })
+        disponibilidad_de_estudio = "14:00 a 18:00"
+        tiempo_de_estudio = ""
+        salida = '''
+{
+    "Lunes": [
+        {"Materia": "Matematicas", "hora inicio": "14:00", "hora fin": "14:30"},
+        {"Materia": "Filosofia", "hora inicio": "14:30", "hora fin": "15:00"}
+    ],
+    "Martes": [
+        {"Materia": "Ciencias Naturales", "hora inicio": "14:00", "hora fin": "14:30"}
+    ]
+}
+'''
+        from ..utils import config
+        apiKey = config.OPENAI_API_KEY
+        promt = f""" 
+Quiero generar un horario de estudio aparte basado en mi horario actual de clases. Aquí está mi horario de clases:
+
+{data}
+
+Quiero un horario de estudio complementario con las siguientes condiciones:
+
+1. Dedicar **30 minutos** de estudio a cada materia.
+2. El horario de estudio debe estar fuera del horario de clases.
+3. Mi disponibilidad para estudiar es de **"14:00 a 18:00"**.
+4. Las materias deben distribuirse de forma aleatoria para que no sigan siempre el mismo orden.
+5. El horario generado debe ser diferente cada vez que se realice esta consulta.
+6. La salida debe ser un JSON organizado por días de la semana con esta estructura exacta:
+
+{salida}
+
+Por favor, devuelve **solo el JSON** sin explicaciones ni texto adicional.
+         """
+        url = 'https://api.openai.com/v1/chat/completions'
+        headers = {
+            'Authorization': f'{apiKey}',
+            'Content-Type': 'application/json',
+        }
+        payload = {
+            'model': 'gpt-4',
+            'messages': [
+                {'role': 'user', 'content': promt}
+            ],
+            'max_tokens': 5000,
+            'temperature': 0.7,
+        }
+        try:
+            response = requests.post(url, json=payload, headers=headers)
+            response.raise_for_status()  # Levanta una excepción si hay un error HTTP
+            data = response.json()
+            respuesta = data.get('choices', [{}])[0].get('message', {}).get('content', "Sin respuesta")
+            json_str = re.search(r'{.*}', respuesta, re.DOTALL).group() 
+            print(json_str)
+            return json_str
+        
+        except requests.exceptions.RequestException as e:
+            raise ValueError(f"Error al llamar a la API de OpenAI: {e}")
+        
+    @http.route('/api/alumno/guardar-horario/<int:alumno_id>', type='http', auth='public', methods=['POST'], csrf=False)
+    def guardar_horario_generado(self, alumno_id, **kwargs):
+        data = json.loads(request.httprequest.data.decode('utf-8'))
+        horario = data.get('horario')
+        alumno = request.env['agenda.alumno'].sudo().search([('id', '=' , alumno_id)])
+        alumno.write({'horario_generado':horario})
+
+    @http.route('/api/alumno/horario/<int:alumno_id>', type='http', auth='public', methods=['GET'], csrf=False)
+    def get_horario_generado(self, alumno_id, **kwargs):
+        alumno = request.env['agenda.alumno'].sudo().search([('id', '=' , alumno_id)])
+
+        return http.Response(
+            json.dumps(alumno.horario_generado),
+            status=200,
+            mimetype='application/json'
+        )
+        
+        
