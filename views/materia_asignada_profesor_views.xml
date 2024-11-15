@@ -1,0 +1,32 @@
+<odoo>
+    <!-- Tree View -->
+    <record id="view_materia_asignada_profesor_list" model="ir.ui.view">
+        <field name="name">Materias Asignadas Profesor list</field>
+        <field name="model">agenda.materia.horario</field>
+        <field name="arch" type="xml">
+            <list string="Materias Asignadas al Profesor">
+                <field name="materia_id" string="Materia"/>
+                <field name="curso_nombre" string="Curso"/>
+                <field name="horario_id" string="Horario"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_materia_asignada_profesor_form" model="ir.ui.view">
+        <field name="name">Materias Asignadas Profesor Form</field>
+        <field name="model">agenda.materia.horario</field>
+        <field name="arch" type="xml">
+            <form string="Materias Asignadas al Profesor">
+                <sheet>
+                    <group>
+                        <field name="profesor_id" readonly="1" string="Profesor"/>
+                        <field name="materia_id" string="Materia" readonly="1"/>
+                        <field name="curso_id" string="Curso" readonly="1"/>
+                        <field name="horario_id" string="Horario"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

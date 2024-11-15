@@ -22,11 +22,19 @@
         'data/materia_horario_seeder.xml',
         'data/alumno_curso_seeder.xml',
         'data/apoderado_alumno_seeder.xml',
+
         'views/materia_view.xml',
         'views/curso_view.xml',
         #'views/mis_materias.xml',
-        'views/menu_view.xml',
-        
+        'views/alumno_views.xml',
+        'views/ae_horario_views.xml',
+        'views/apoderado_views.xml',
+        'views/profesor_views.xml',
+        'views/ae_materia_horario_views.xml',
+        'views/alumno_curso_views.xml',
+        'views/ae_apoderado_alumno_views.xml',
+        'views/materia_asignada_profesor_views.xml',
+        'views/menu_view.xml',  
     ],
     'license': 'LGPL-3',
     'images': ['static/description/banner.gif'],  # Descomenta si tienes la imagen

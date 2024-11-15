@@ -1,0 +1,29 @@
+<odoo>
+        <!-- Vista de Lista (Tree View) para Apoderado-Alumno -->
+        <record id="view_agenda_apoderado_alumno_list" model="ir.ui.view">
+            <field name="name">agenda.apoderado.alumno.list</field>
+            <field name="model">agenda.apoderado.alumno</field>
+            <field name="arch" type="xml">
+                <list string="Relación Apoderado-Alumno" editable="bottom">
+                    <field name="apoderado_id"/>
+                    <field name="alumno_id"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Vista de Formulario (Form View) para Apoderado-Alumno -->
+        <record id="view_agenda_apoderado_alumno_form" model="ir.ui.view">
+            <field name="name">agenda.apoderado.alumno.form</field>
+            <field name="model">agenda.apoderado.alumno</field>
+            <field name="arch" type="xml">
+                <form string="Relación Apoderado-Alumno">
+                    <sheet>
+                        <group>
+                            <field name="apoderado_id"/>
+                            <field name="alumno_id"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>  
+</odoo>

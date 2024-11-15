@@ -21,6 +21,8 @@
                 <sheet>
                     <group>
                         <field name="nombre"/>
+                        <field name="paralelo"/>
+                        <field name="nivel"/>
                     </group>
                 </sheet>
             </form>

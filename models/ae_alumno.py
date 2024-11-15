@@ -30,3 +30,4 @@ class Alumno(models.Model):
 
         # Llama al método original para procesar los registros
         return super(Alumno, self).create(vals_list)
+

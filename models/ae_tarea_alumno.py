@@ -13,5 +13,3 @@ class TareaAlumno(models.Model):
     tarea_id = fields.Many2one('agenda.tarea', string="Tarea", required=True)
     alumno_id = fields.Many2one('agenda.alumno', string="Alumno", required=True) 
 
-
-

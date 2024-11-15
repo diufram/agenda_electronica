@@ -1,0 +1,58 @@
+<odoo>
+    <data>
+        <!-- Vista de Lista (Tree View) para Notificación -->
+        <record id="view_agenda_notificacion_tree" model="ir.ui.view">
+            <field name="name">agenda.notificacion.tree</field>
+            <field name="model">agenda.notificacion</field>
+            <field name="arch" type="xml">
+                <tree string="Notificaciones" editable="bottom">
+                    <field name="titulo"/>
+                    <field name="creador_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Vista de Formulario (Form View) para Notificación -->
+        <record id="view_agenda_notificacion_form" model="ir.ui.view">
+            <field name="name">agenda.notificacion.form</field>
+            <field name="model">agenda.notificacion</field>
+            <field name="arch" type="xml">
+                <form string="Notificación">
+                    <sheet>
+                        <group>
+                            <field name="titulo"/>
+                            <field name="creador_id"/>
+                        </group>
+                        <group>
+                            <field name="mensaje"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Vista de Búsqueda (Search View) para Notificación -->
+        <record id="view_agenda_notificacion_search" model="ir.ui.view">
+            <field name="name">agenda.notificacion.search</field>
+            <field name="model">agenda.notificacion</field>
+            <field name="arch" type="xml">
+                <search string="Buscar Notificaciones">
+                    <field name="titulo" string="Título"/>
+                    <field name="creador_id" string="Persona"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- Acción de Ventana para Notificación -->
+        <record id="action_agenda_notificacion" model="ir.actions.act_window">
+            <field name="name">Notificaciones</field>
+            <field name="res_model">agenda.notificacion</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_agenda_notificacion_search"/>
+        </record>
+
+        <!-- Menú para Notificación -->
+        <menuitem id="menu_agenda_notificacion_root" name="Configuración de Comunicación" sequence="1"/>
+        <menuitem id="menu_agenda_notificacion" name="Notificaciones" parent="menu_agenda_notificacion_root" action="action_agenda_notificacion" sequence="2"/>
+    </data>
+</odoo>

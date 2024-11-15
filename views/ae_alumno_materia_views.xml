@@ -1,0 +1,55 @@
+<odoo>
+    <data>
+        <!-- Vista de Lista (Tree View) para Alumno en Materia -->
+        <record id="view_agenda_alumno_materia_tree" model="ir.ui.view">
+            <field name="name">agenda.alumno.materia.tree</field>
+            <field name="model">agenda.alumno.materia</field>
+            <field name="arch" type="xml">
+                <tree string="Alumno en Materia" editable="bottom">
+                    <field name="materia_horario_id"/>
+                    <field name="alumno_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Vista de Formulario (Form View) para Alumno en Materia -->
+        <record id="view_agenda_alumno_materia_form" model="ir.ui.view">
+            <field name="name">agenda.alumno.materia.form</field>
+            <field name="model">agenda.alumno.materia</field>
+            <field name="arch" type="xml">
+                <form string="Alumno en Materia">
+                    <sheet>
+                        <group>
+                            <field name="materia_horario_id"/>
+                            <field name="alumno_id"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Vista de Búsqueda (Search View) para Alumno en Materia -->
+        <record id="view_agenda_alumno_materia_search" model="ir.ui.view">
+            <field name="name">agenda.alumno.materia.search</field>
+            <field name="model">agenda.alumno.materia</field>
+            <field name="arch" type="xml">
+                <search string="Buscar Alumno en Materia">
+                    <field name="materia_horario_id" string="Materia"/>
+                    <field name="alumno_id" string="Alumno"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- Acción de Ventana para Alumno en Materia -->
+        <record id="action_agenda_alumno_materia" model="ir.actions.act_window">
+            <field name="name">Alumnos en Materia</field>
+            <field name="res_model">agenda.alumno.materia</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_agenda_alumno_materia_search"/>
+        </record>
+
+        <!-- Menú para Alumno en Materia -->
+        <menuitem id="menu_agenda_alumno_materia_root" name="Agenda Escolar" sequence="1"/>
+        <menuitem id="menu_agenda_alumno_materia" name="Alumnos en Materia" parent="menu_agenda_alumno_materia_root" action="action_agenda_alumno_materia" sequence="2"/>
+    </data>
+</odoo>

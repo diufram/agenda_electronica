@@ -1,0 +1,66 @@
+<odoo>
+    <data>
+        <!-- Vista de Lista (Tree View) para Curso -->
+        <record id="view_agenda_curso_tree" model="ir.ui.view">
+            <field name="name">agenda.curso.tree</field>
+            <field name="model">agenda.curso</field>
+            <field name="arch" type="xml">
+                <tree string="Cursos" editable="bottom">
+                    <field name="nivel"/>
+                    <field name="nombre"/>
+                    <field name="paralelo"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Vista de Formulario (Form View) para Curso -->
+        <record id="view_agenda_curso_form" model="ir.ui.view">
+            <field name="name">agenda.curso.form</field>
+            <field name="model">agenda.curso</field>
+            <field name="arch" type="xml">
+                <form string="Curso">
+                    <sheet>
+                        <group>
+                            <field name="nivel"/>
+                            <field name="nombre"/>
+                            <field name="paralelo"/>
+                        </group>
+                        <group string="Materias Asignadas">
+                            <field name="materia_horarios_ids">
+                                <tree string="Materias">
+                                    <field name="nombre"/>
+                                    <field name="horario"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Vista de Búsqueda (Search View) para Curso -->
+        <record id="view_agenda_curso_search" model="ir.ui.view">
+            <field name="name">agenda.curso.search</field>
+            <field name="model">agenda.curso</field>
+            <field name="arch" type="xml">
+                <search string="Buscar Cursos">
+                    <field name="nivel" string="Nivel"/>
+                    <field name="nombre" string="Nombre"/>
+                    <field name="paralelo" string="Paralelo"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- Acción de Ventana para Curso -->
+        <record id="action_agenda_curso" model="ir.actions.act_window">
+            <field name="name">Cursos</field>
+            <field name="res_model">agenda.curso</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_agenda_curso_search"/>
+        </record>
+
+        <!-- Menú para Curso -->
+        <menuitem id="menu_agenda_curso_root" name="Configuración Escolar" sequence="1"/>
+        <menuitem id="menu_agenda_curso" name="Cursos" parent="menu_agenda_curso_root" action="action_agenda_curso" sequence="2"/>
+    </data>
+</odoo>

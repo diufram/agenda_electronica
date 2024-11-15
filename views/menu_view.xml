@@ -14,6 +14,56 @@
         <field name="res_model">agenda.curso</field>
         <field name="view_mode">list,form</field>
     </record>
+     <!-- iiiiiiii -->
+    <record id="action_agenda_alumno" model="ir.actions.act_window">
+        <field name="name">alumnos</field>
+        <field name="res_model">agenda.alumno</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+     <record id="action_agenda_horario" model="ir.actions.act_window">
+        <field name="name">Horarios</field>
+        <field name="res_model">agenda.horario</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="action_agenda_apoderado" model="ir.actions.act_window">
+        <field name="name">Apoderados</field>
+        <field name="res_model">agenda.apoderado</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="action_agenda_profesor" model="ir.actions.act_window">
+        <field name="name">Profesores</field>
+        <field name="res_model">agenda.profesor</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="action_agenda_materia_horario" model="ir.actions.act_window">
+        <field name="name">Materias y Horarios</field>
+        <field name="res_model">agenda.materia.horario</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="action_agenda_alumno_curso" model="ir.actions.act_window">
+        <field name="name">Alumno Curso</field>
+        <field name="res_model">agenda.alumno.curso</field>
+        <field name="view_mode">list,form</field>
+      <!--  <field name="view_id" ref="view_alumno_curso_tree"/>  -->
+    </record>
+
+    <record id="action_agenda_apoderado_alumno" model="ir.actions.act_window">
+        <field name="name">Apoderados y Alumnos</field>
+        <field name="res_model">agenda.apoderado.alumno</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="action_agenda_materia_asignada_profesor" model="ir.actions.act_window">
+        <field name="name">Materias Asignadas</field>
+        <field name="res_model">agenda.materia.horario</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'default_profesor_id': uid}</field>
+    </record>
 
 <!--     <record id="action_materia_horario_alumno" model="ir.actions.act_window">
         <field name="name">Mis Materias</field>
@@ -28,17 +78,68 @@
             name="Materias" 
             parent="menu_agenda_root" 
             action="action_agenda_materia" 
-            groups="agenda_electronica.group_administrador,agenda_electronica.group_profesor,agenda_electronica.group_alumno"/>
+            groups="agenda_electronica.group_administrador"/>
 
     <menuitem id="menu_agenda_curso" 
             name="Cursos" 
             parent="menu_agenda_root" 
             action="action_agenda_curso"  
-            groups="agenda_electronica.group_administrador,agenda_electronica.group_profesor,agenda_electronica.group_alumno"/>
+            groups="agenda_electronica.group_administrador,agenda_electronica.group_alumno"/>
+
+      <!-- ADMINISTRADOR -->              
+
+    <menuitem id="menu_agenda_alumno" 
+            name="Alumnos" 
+            parent="menu_agenda_root" 
+            action="action_agenda_alumno"  
+            groups="agenda_electronica.group_administrador,agenda_electronica.group_profesor"/>
+
+    <menuitem id="menu_agenda_horario" 
+            name="Horarios" 
+            parent="menu_agenda_root" 
+            action="action_agenda_horario"  
+            groups="agenda_electronica.group_administrador,agenda_electronica.group_profesor,agenda_electronica.group_alumno"/>  
+
+    <menuitem id="menu_agenda_apoderado" 
+              name="Apoderados" 
+              parent="menu_agenda_root" 
+              action="action_agenda_apoderado"
+              groups="agenda_electronica.group_administrador,agenda_electronica.group_profesor"/>  
+
+    <menuitem id="menu_agenda_profesor" 
+              name="Profesores" 
+              parent="menu_agenda_root" 
+              action="action_agenda_profesor"
+              groups="agenda_electronica.group_administrador"/>     
+
+    <menuitem id="menu_agenda_materia_horario"
+              name="Materias y Horarios" 
+              parent="menu_agenda_root" 
+              action="action_agenda_materia_horario"
+              groups="agenda_electronica.group_administrador"/>  
+    
+    <menuitem id="menu_agenda_alumno_curso" 
+              name="Alumno Curso" 
+              parent="menu_agenda_root" 
+              action="action_agenda_alumno_curso" 
+              groups="agenda_electronica.group_administrador"/>
+    
+    <menuitem id="menu_agenda_apoderado_alumno" 
+              name="Apoderados y Alumnos" 
+              parent="menu_agenda_root" 
+              action="action_agenda_apoderado_alumno" 
+              groups="agenda_electronica.group_administrador"/>
+    <!--PROFESOR-->
+     <menuitem id="menu_agenda_materia_asignada_profesor" 
+              name="Materias Asignadas" 
+              parent="menu_agenda_root" 
+              action="action_agenda_materia_asignada_profesor"
+              groups="agenda_electronica.group_profesor"/>
 
 <!--     <menuitem id="menu_materias_horarios_alumno"
             name="Mis Materias"
             parent="menu_agenda_root"
             action="action_materia_horario_alumno"
             groups="agenda_electronica.group_alumno"/> -->
+
 </odoo>

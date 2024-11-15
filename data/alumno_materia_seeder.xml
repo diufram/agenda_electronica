@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="alumno_materia_1" model="agenda.alumno.materia">
+        <field name="materia_horario_id">1</field>
+        <field name="alumno_id">2</field>
+    </record>
+
+    <record id="alumno_materia_2" model="agenda.alumno.materia">
+        <field name="materia_horario_id">2</field>
+        <field name="alumno_id">2</field>
+    </record>
+
+    <record id="alumno_materia_3" model="agenda.alumno.materia">
+        <field name="materia_horario_id">2</field>
+        <field name="alumno_id">3</field>
+    </record>
+
+    <record id="alumno_materia_4" model="agenda.alumno.materia">
+        <field name="materia_horario_id">2</field>
+        <field name="alumno_id">1</field>
+    </record>
+        
+
+</odoo>

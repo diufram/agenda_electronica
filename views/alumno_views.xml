@@ -1,0 +1,35 @@
+<odoo>
+    <!-- Vista tipo List -->
+    <record id="view_agenda_alumno_list" model="ir.ui.view">
+        <field name="name">agenda.alumno.list</field>
+        <field name="model">agenda.alumno</field>
+        <field name="arch" type="xml">
+            <list string="Alumnos">
+                <!-- Mostrar CI del alumno -->
+                <field name="ci" string="CI"/>
+                <!-- Mostrar el nombre del usuario relacionado -->
+                <field name="user_id" string="Usuario"/>
+                <!-- Mostrar el token del dispositivo -->
+                <field name="token" string="Token"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vista tipo Form -->
+    <record id="view_agenda_alumno_form" model="ir.ui.view">
+        <field name="name">agenda.alumno.form</field>
+        <field name="model">agenda.alumno</field>
+        <field name="arch" type="xml">
+            <form string="Alumno">
+                <sheet>
+                    <group>
+                        <!-- Grupo para mostrar información básica -->
+                        <field name="ci" string="CI"/>
+                        <field name="user_id" string="Alumno"/>
+                        <field name="token" string="Token"/>
+                    </group> 
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

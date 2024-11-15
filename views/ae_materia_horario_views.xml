@@ -1,0 +1,35 @@
+<odoo>
+    <data>
+        <!-- Vista de Lista (Tree View) para Materia-Horario -->
+        <record id="view_agenda_materia_horario_list" model="ir.ui.view">
+            <field name="name">agenda.materia.horario.list</field>
+            <field name="model">agenda.materia.horario</field>
+            <field name="arch" type="xml">
+                <list string="Materias por Horario" editable="bottom">
+                    <field name="materia_id"/>
+                    <field name="horario_id"/>
+                    <field name="curso_id"/>
+                    <field name="profesor_id"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Vista de Formulario (Form View) para Materia-Horario -->
+        <record id="view_agenda_materia_horario_form" model="ir.ui.view">
+            <field name="name">agenda.materia.horario.form</field>
+            <field name="model">agenda.materia.horario</field>
+            <field name="arch" type="xml">
+                <form string="Materia por Horario">
+                    <sheet>
+                        <group>
+                            <field name="materia_id"/>
+                            <field name="horario_id"/>
+                            <field name="curso_id"/>
+                            <field name="profesor_id"/>
+                        </group>                       
+                    </sheet>
+                </form>
+            </field>
+        </record>  
+    </data>
+</odoo>
